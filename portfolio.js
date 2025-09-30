@@ -124,28 +124,7 @@ AOS.init({
                     }
                 });
             }
-                    
-        // document.getElementById('contact-form').addEventListener('submit', function(e) {
-        //     e.preventDefault();
-        //     const formMessage = document.getElementById('form-message');
-        //     formMessage.innerHTML = '<span class="text-green-600">Thank you for your message! I will get back to you shortly.</span>';
-        //     this.reset();
-        // });
-
-        // const socialDropdownBtn = document.getElementById('social-dropdown-btn');
-        // const socialDropdownMenu = document.getElementById('social-dropdown-menu');
-
-        // socialDropdownBtn.addEventListener('click', function(e) {
-        //     e.stopPropagation();
-        //     socialDropdownMenu.classList.toggle('active');
-        // });
-
-        // // Close the dropdown if the user clicks outside of it
-        // window.addEventListener('click', function(event) {
-        //     if (!socialDropdownBtn.contains(event.target) && !socialDropdownMenu.contains(event.target)) {
-        //         socialDropdownMenu.classList.remove('active');
-        //     }
-        // });
+      
 
         // Initialize Feather icons after the DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
@@ -193,3 +172,16 @@ AOS.init({
                 carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
             });
         }
+        // Mobile Menu Toggle Logic
+            const hamburgerBtn = document.getElementById('hamburger-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            hamburgerBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
