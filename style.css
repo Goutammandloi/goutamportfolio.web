@@ -220,6 +220,7 @@ html.light-mode .skill-tag {background-color: #f1f5f9;color: #475569; border: 1p
 #chatbot-input:focus {outline: none;border-color: var(--accent-start);}
 #chatbot-send {background: none;border: none;color: var(--accent-start);padding: 0 0.5rem;cursor: pointer;margin-left: 0.5rem; transition: color 0.3s ease;}
 #chatbot-send:hover { color: var(--accent-end); }
+<<<<<<< HEAD
 
 /* --- Universal Card Styling (Shared with Projects) --- */
 .project-card, .publication-card, .timeline-content {
@@ -342,3 +343,5 @@ display: none;
 .error {
     background-color: #dc3545; /* Red */
 }
+=======
+>>>>>>> 4afdafed244a30a91eabbae42297ebf9847b897b
