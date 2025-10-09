@@ -14,9 +14,9 @@
 
 <body  class="transition-colors duration-500">
     <!-- title bar -->
-<nav class="sticky top-0 z-50 bg-white dark:bg-gray-800 bg-opacity-90 dark:bg-opacity-90 backdrop-blur-sm shadow-sm py-4 transition-colors duration-500">
+<nav  class="sticky top-0 z-50  bg-opacity-90 dark:bg-opacity-90 backdrop-blur-sm shadow-sm py-4 transition-colors duration-500">
     <div class="container mx-auto px-6 flex justify-between items-center">
-        <a href="#" class="text-2xl font-extrabold   transition-colors duration-500">Goutam Mandloi</a>
+        <a href="#" class="text-2xl font-extrabold transition-colors duration-500">Goutam Mandloi</a>
         
         <div class="flex items-center space-x-4 lg:space-x-8">
             <div class="hidden lg:flex items-center space-x-8">
@@ -48,21 +48,21 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             </button>
 
-            <button id="hamburger-menu" class="lg:hidden p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu  "><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            <button id="hamburger-menu" class="lg:hidden p-2 rounded-md hover:bg-gray-200 dark:hover:bg-white/10 transition-colors duration-300" aria-label="Toggle mobile menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
             </button>
         </div>
     </div>
-    
-    <div id="mobile-menu" class="hidden lg:hidden bg-white dark:bg-gray-800 absolute w-full left-0 top-full shadow-lg border-t dark:border-gray-700">
-        <div class="flex flex-col items-center space-y-4 py-4">
-            <a href="#about" class="text-lg font-bold  hover:text-blue-500 transition-colors duration-300">About</a>
-            <a href="#experience" class="text-lg font-bold  hover:text-blue-500 transition-colors duration-300">Experience</a>
-            <a href="#projects" class="text-lg font-bold  hover:text-blue-500 transition-colors duration-300">Projects</a>
-            <a href="#skills" class="text-lg font-bold  hover:text-blue-500 transition-colors duration-300">Skills</a>
-            <a href="#certifications" class="text-lg font-bold  hover:text-blue-500 transition-colors duration-300">Certifications</a>
-            <a href="#education" class="text-lg font-bold  hover:text-blue-500 transition-colors duration-300">Education</a>
-            <a href="#contact" class="text-lg font-bold  hover:text-blue-500 transition-colors duration-300">Contact</a>
+        <div id="mobile-menu" class="hidden lg:hidden absolute w-full left-0 top-full shadow-lg border-t mobile-menu-themed">
+            <div class="mobile-menu-links">
+                <a href="#about" >About</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#certifications">Certifications</a>
+                <a href="#education">Education</a>
+                <a href="#contact">Contact</a>
+            </div>
         </div>
     </div>
 </nav>
@@ -77,7 +77,7 @@
                     </div>
                 <!-- text -->
                     <div class="text-center md:text-left order-2 md:order-1" data-aos="fade-right">
-                        <h1 class="text-4xl md:text-6xl font-extrabold accent-text mb-4">
+                        <h1 class="text-4xl md:text-6xl font-extrabold accent-text mb-4" style="transition: none; color: var(--text-primary);">
                             Hi, I'm <span class="text-blue-600 dark:text-blue-400">Goutam Mandloi</span>
                         </h1>
                         <p class="text-xl md:text-2xl accent-text mb-6">
@@ -333,6 +333,73 @@
             </div>
         </section>
 
+        <!-- publication section  -->
+            <section id="publications" class="content-section">
+                    <div class="container" data-aos="fade-up">
+                    <h2 class="section-title">Publications</h2>
+                    <div class="publications-grid">
+                        <div class="publication-card" data-aos="fade-up">
+                        <img
+                            src="image/publication certificate for KrishiDIsha.png"
+                            alt="KrishiDisha Publication Certificate"
+                            class="publication-image"
+                        />
+                        <div class="publication-content">
+                            <h3>
+                            KrishiDisha: Revolutionizing Agriculture with Intelligent
+                            Recommendations...
+                            </h3>
+                            <p class="publication-meta">
+                            Paper presented at and accepted for the
+                            <strong
+                                >IEEE International Conference on Engineering Innovations
+                                and Technologies (ICoEIT-2025)</strong
+                            >.
+                            </p>
+                            <p>
+                            This paper introduces an intelligent agricultural platform
+                            that assists farmers with crop selection, disease detection,
+                            and yield prediction using advanced AI models.
+                            </p>
+                        </div>
+                        </div>
+                        <div
+                        class="publication-card"
+                        data-aos="fade-up"
+                        data-aos-delay="100"
+                        >
+                        <img
+                            src="image/publication certificate for Student Dropout.jpeg"
+                            alt="Student Dropout Publication Certificate"
+                            class="publication-image"
+                        />
+                        <div class="publication-content">
+                            <h3>
+                            A Review on Understanding the Patterns of Student Dropout
+                            </h3>
+                            <p class="publication-meta">
+                            Published in <strong>Springer Nature Singapore</strong> |
+                            Presented at WCSC 2024.
+                            </p>
+                            <p>
+                            This research analyzes demographic and academic data to
+                            identify key factors influencing dropout rates, achieving high
+                            predictive accuracy with an ANN model.
+                            </p>
+                            <p class="publication-meta">
+                            DOI:
+                            <a
+                                href="https://doi.org/10.1007/978-981-97-9006-7_20"
+                                target="_blank"
+                                >10.1007/978-981-97-9006-7_20</a
+                            >
+                            </p>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </section>
+
         <!-- Certification section  -->
         <section id="certifications" class="py-20">
             <h2 class="section-title text-4xl text-center mb-12  hover:text-blue-500 transition-colors duration-300" data-aos="fade-up">Certifications</h2>
@@ -360,33 +427,35 @@
                 <img class="modal-content" id="modal-img">
             </div>
         </section>
-        <section id="contact" class="py-20">
+
+        <!-- contact section  -->
+          <section id="contact" class="py-20">
             <h2 class="section-title text-4xl text-center mb-12" data-aos="fade-up">Get in Touch</h2>
             <div class="max-w-2xl mx-auto">
                 <p class="contact-text" data-aos="fade-up">
-                    I'm currently seeking new opportunities. Feel free to connect with me!
+                   My passion for writing elegant code and ensuring seamless deployment drives my approach to the entire software development lifecycle. 
+                   <br>I am looking for a role where I can apply these skills to build reliable, high-quality software!
                 </p>
                 <form id="contact-form" class="contact-form-container" data-aos="fade-up" data-aos-delay="100">
-                    <h3>Send Me a Message</h3>
+                    <h4>Feel free to Send Me email.I'll get back to you as soon as possible. </h4>
                     <div class="form-group">
-                        <label for="name">Name</label>
+                        <label for="name">Your Name:</label>
                         <input type="text" id="name" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email">Your Email-Id</label>
                         <input type="email" id="email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="message">Message</label>
+                        <label for="message">Your Message</label>
                         <textarea id="message" name="message" rows="4" required></textarea>
                     </div>
-                    <div id="form-message" class="text-center"></div>
-                    <button type="submit" class="btn-primary">
-                        Send Message
-                    </button>
+                    <button type="submit" class="btn-primary">Send Message</button>
                 </form>
+                      <div id="status" class="mt-6 p-4 rounded-lg text-sm font-semibold min-h-[56px] flex items-center justify-center"></div>
             </div>
         </section>
+       
     </main>
 
     <footer class="bg-gray-100 dark:bg-gray-800   py-8 text-center transition-colors duration-500">

@@ -24,15 +24,50 @@ AOS.init({
                 localStorage.setItem('theme', 'light-mode');
             }
         });
-
+        
         // Contact Form Submission
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formMessage = document.getElementById('form-message');
-            formMessage.innerHTML = '<span class="text-green-600">Thank you for your message! I will get back to you shortly.</span>';
-            this.reset();
-        });
+        const form = document.getElementById('contact-form');
+        const statusDiv = document.getElementById('status');
 
+        form.addEventListener("submit", async function(event) {
+            event.preventDefault();
+            
+            statusDiv.textContent = 'Sending your email...'; 
+            statusDiv.className = 'mt-6 text-center text-sm font-medium text-blue-600';
+            statusDiv.classList.remove('success', 'error'); 
+
+            const formData = {
+                name: form.name.value,
+                email: form.email.value,
+                message: form.message.value,
+            };
+
+            try {
+                // The fetch URL is now your own API endpoint
+                const response = await fetch('/api/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    statusDiv.innerHTML = "Thanks for your message! I'll get back to you soon.";
+                    statusDiv.classList.add('success');
+                    form.reset();
+                } else {
+                    throw new Error(result.message || 'Something went wrong.');
+                }
+
+            } catch (error) {
+                statusDiv.innerHTML = `Oops! There was an error: ${error.message}`;
+                statusDiv.classList.add('error');
+            }
+        });
+      
         // Simple Chatbot Logic
         const chatbotContainer = document.getElementById('chatbot-container');
         const chatbotIcon = document.getElementById('chatbot-icon');
@@ -185,3 +220,20 @@ AOS.init({
                     mobileMenu.classList.add('hidden');
                 });
             });
+
+
+
+            // --- Dynamic Card Glow Effect (for non-touch devices) ---
+const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+if (!isTouchDevice()) {
+document.querySelectorAll('.project-card, .publication-card').forEach(card => {
+card.addEventListener('mousemove', e => {
+ const rect = card.getBoundingClientRect();
+ const x = e.clientX - rect.left;
+ const y = e.clientY - rect.top;
+ card.style.setProperty('--x', `${x}px`);
+ card.style.setProperty('--y', `${y}px`);
+});
+ });
+}
