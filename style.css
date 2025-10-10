@@ -12,7 +12,7 @@ body {font-family: var(--font-family);background-color: var(--bg-primary);color:
 
 a {color: var(--accent-start);text-decoration: none;transition: color 0.3s ease;}
 
-a:hover, a:active ,h1:hover, h1:active ,strong:hover, strong:active{color: var(--accent-end);}
+a:hover, a:active ,h1:hover, h1:active ,strong:hover, strong:active  {color: var(--accent-end);}
 
 html.light-mode a:hover, a:active ,h1:hover, h1:active ,strong:hover, strong:active{color: var(--accent-end);}
 
@@ -220,125 +220,202 @@ html.light-mode .skill-tag {background-color: #f1f5f9;color: #475569; border: 1p
 #chatbot-input:focus {outline: none;border-color: var(--accent-start);}
 #chatbot-send {background: none;border: none;color: var(--accent-start);padding: 0 0.5rem;cursor: pointer;margin-left: 0.5rem; transition: color 0.3s ease;}
 #chatbot-send:hover { color: var(--accent-end); }
+@media (max-width: 768px) {#chatbot-icon,#chatbot-container {right: 20px;bottom: 20px;}
+    #chatbot-window {width: calc(100vw - 40px);height: 70vh;max-width: 400px;max-height: 600px; }
+}
 
 /* --- Universal Card Styling (Shared with Projects) --- */
-.project-card, .publication-card, .timeline-content {
-background-color: var(--bg-secondary);
-border: 1px solid var(--card-border);
-border-radius: 12px;
-transition: all 0.4s ease;
-position: relative;
-overflow: hidden;
-}
-.project-card:hover, .publication-card:hover, .timeline-item:hover .timeline-content {
-transform: translateY(-8px);
-border-color: var(--accent-start);
-box-shadow: 0 10px 30px var(--shadow-color);
-}
-.project-card::before, .publication-card::before {
-content: ''; position: absolute; top: var(--y, 0); left: var(--x, 0);
-width: 100%; height: 100%;
-background: radial-gradient(circle at center, var(--accent-start), transparent 25%);
-opacity: 0; transition: opacity 0.5s ease; z-index: 0;
-transform: translate(-50%, -50%); pointer-events: none;
-}
+.project-card, .publication-card, .timeline-content {background-color: var(--bg-secondary);border: 1px solid var(--card-border);border-radius: 12px;transition: all 0.4s ease;position: relative;overflow: hidden;}
+.project-card:hover, .publication-card:hover, .timeline-item:hover .timeline-content {transform: translateY(-8px);border-color: var(--accent-start);box-shadow: 0 10px 30px var(--shadow-color);}
+.project-card::before, .publication-card::before {content: ''; position: absolute; top: var(--y, 0); left: var(--x, 0);width: 100%; height: 100%;background: radial-gradient(circle at center, var(--accent-start), transparent 25%);opacity: 0; transition: opacity 0.5s ease; z-index: 0;transform: translate(-50%, -50%); pointer-events: none;}
 .project-card:hover::before, .publication-card:hover::before { opacity: 0.1; }
 .project-card > *, .publication-card > * { position: relative; z-index: 1; }
 
 /* --- Publications Section Specific Styles --- */
-.publications-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 30px; 
-}
-.publication-card { 
-    display: flex; 
-    gap: 25px; 
-    align-items: center; 
-    padding: 25px; 
-}
-.publication-image { 
-    width: 150px; 
-    height: 150px; 
-    object-fit: cover; 
-    border-radius: 8px; 
-    border: 1px solid var(--card-border); 
-    flex-shrink: 0; 
-}
-.publication-content { 
-    flex: 1; 
-}
-.publication-content h3 { 
-    font-size: 1.5rem; 
-    margin-bottom: 10px; 
-    color: var(--text-primary); 
-}
-.publication-content p { 
-    color: var(--text-secondary); 
-}
-.publication-meta { 
-    font-size: 0.9rem; 
-    color: var(--text-secondary); 
-    margin-bottom: 10px; 
-    font-weight: 500; 
+.publications-grid { display: grid; grid-template-columns: 1fr; gap: 30px; }
+.publication-card { display: flex; gap: 25px; align-items: center; padding: 25px; }
+.publication-image { width: 150px; height: 150px; object-fit: cover; border-radius: 8px; border: 1px solid var(--card-border); flex-shrink: 0; }
+.publication-content { flex: 1; }
+.publication-content h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--text-primary); }
+.publication-content p { color: var(--text-secondary); }
+.publication-meta { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 10px; font-weight: 500; }
+
+
+#status {position: fixed;top: 0;left: 0;width: 100%;padding: 1rem;text-align: center;font-size: 1rem;font-weight: 600;color: white;z-index: 1000;transform: translateY(-100%); opacity: 0;transition: transform 0.4s ease-out, opacity 0.4s ease-out;}
+
+#status.success,
+#status.error {opacity: 1;transform: translateY(0);}
+.success {background-color: #d1fae5; color: #065f46; }
+.error {background-color: #fee2e2; }
+
+.alert-modal-container {position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 3000;display: flex;justify-content: center;align-items: center;padding: 20px;opacity: 0;pointer-events: none;transition: opacity 0.3s ease;}
+
+.alert-modal-container.visible {opacity: 1;pointer-events: auto;}
+.modal-overlay {position: absolute;top: 0;left: 0;width: 100%;height: 100%;background-color: rgba(0, 0, 0, 0.6);backdrop-filter: blur(5px);-webkit-backdrop-filter: blur(5px);}
+
+.modal-box {position: relative;z-index: 3001;background-color: var(--bg-secondary);border: 1px solid var(--card-border);color: var(--text-primary);border-radius: 16px;padding: 30px;max-width: 400px;width: 100%;text-align: center;box-shadow: 0 10px 30px rgba(0,0,0,0.2);animation: zoomIn 0.4s ease; }
+
+.modal-icon-container {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 4px;
+    border-style: solid;
 }
 
-/* --- Responsive & Touch Device Adjustments --- */
-@media (max-width: 768px) {
- .publication-card { 
-        flex-direction: column; 
-        text-align: center; 
-    }
-.publication-image { 
-        width: 100%; 
-        height: auto; 
-        max-width: 250px; 
-    }
+.modal-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text-primary);
 }
 
-/* Disable hover-based glow effect on touch devices */
-@media (hover: none) {
-.publication-card:hover {
-transform: none;
-border-color: var(--card-border);
-box-shadow: none;
-}
-.publication-card::before {
-display: none;
-}
+.modal-message {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 25px;
+    line-height: 1.5;
 }
 
-#status {
-    position: fixed; /* Sticks to the top of the screen */
+.modal-button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+
+/* --- Status Modal --- */
+.modal-overlay {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 1rem;
-    text-align: center;
-    font-size: 1rem;
-    font-weight: 600;
-    color: white;
-    z-index: 1000; /* Ensures it's on top of other content */
-    
-    /* Animation setup */
-    transform: translateY(-100%); /* Start hidden above the screen */
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
     opacity: 0;
-    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+    transition: opacity 0.3s ease-in-out;
 }
 
-/* Style for the banner when it becomes visible (has a class) */
-#status.success,
-#status.error {
-    transform: translateY(0); /* Slides down into view */
+.modal-overlay.visible {
+    display: flex;
     opacity: 1;
 }
 
-/* Background color for success message */
-.success {
-    background-color: #28a745; /* Green */
+.modal-box {
+    background-color: var(--bg-secondary);
+    padding: 2.5rem;
+    border-radius: 12px;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transform: scale(0.9);
+    transition: transform 0.3s ease-in-out;
 }
 
-/* Background color for error message */
-.error {
-    background-color: #dc3545; /* Red */
+.modal-overlay.visible .modal-box {
+    transform: scale(1);
+}
+
+#status-icon-container {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#status-icon-container svg {
+    width: 36px;
+    height: 36px;
+    color: white;
+}
+
+/* Success State Colors */
+.modal-box.success #status-icon-container {
+    background-color: #28a745;
+}
+
+.modal-box.success .modal-button {
+    background-color: #28a745;
+}
+.modal-box.success .modal-button:hover {
+    background-color: #218838;
+}
+
+/* Error State Colors */
+.modal-box.error #status-icon-container {
+    background-color: #dc3545;
+}
+
+.modal-box.error .modal-button {
+    background-color: #dc3545;
+}
+.modal-box.error .modal-button:hover {
+    background-color: #c82333;
+}
+
+.modal-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.modal-message {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.modal-button {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* --- Responsive & Touch Device Adjustments --- */
+@media (max-width: 768px) {.publication-card { flex-direction: column; text-align: center; }
+.publication-image { width: 100%; height: auto; max-width: 250px; }}
+
+/* Disable hover-based glow effect on touch devices */
+@media (hover: none) {.publication-card:hover {transform: none;border-color: var(--card-border);box-shadow: none;}
+.publication-card::before {display: none;}}
+/* --- Responsive Fix for Certificate Carousel --- */
+@media (max-width: 640px) {
+    
+    .certificate-item {
+        width: 75vw;
+    }
+
 }

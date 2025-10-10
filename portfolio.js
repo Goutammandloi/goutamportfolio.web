@@ -24,17 +24,57 @@ AOS.init({
                 localStorage.setItem('theme', 'light-mode');
             }
         });
-        
-        // Contact Form Submission
-        const form = document.getElementById('contact-form');
-        const statusDiv = document.getElementById('status');
 
+        // Contact Form Submission with Modal Feedback
+
+        // Get modal elements
+        const statusModal = document.getElementById('status-modal');
+        const modalBox = statusModal.querySelector('.modal-box');
+        const statusIconContainer = document.getElementById('status-icon-container');
+        const statusTitle = document.getElementById('status-title');
+        const statusMessage = document.getElementById('status-message');
+        const statusCloseBtn = document.getElementById('status-close-btn');
+        const form = document.getElementById('contact-form');
+
+        // SVG icons for success and error states
+        const successIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+        const errorIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+
+        // Function to show the modal with specific content
+        function showStatusModal(type, title, message) {
+            modalBox.className = 'modal-box'; // Reset classes
+            modalBox.classList.add(type);     // Add 'success' or 'error'
+
+            statusIconContainer.innerHTML = (type === 'success') ? successIconSVG : errorIconSVG;
+            statusTitle.textContent = title;
+            statusMessage.textContent = message;
+
+            statusModal.classList.add('visible');
+        }
+
+        // Function to hide the modal
+        function hideStatusModal() {
+            statusModal.classList.remove('visible');
+        }
+
+        // Add event listeners to close the modal
+        statusCloseBtn.addEventListener('click', hideStatusModal);
+        statusModal.addEventListener('click', (e) => {
+            // Close if the outer overlay is clicked, but not the box itself
+            if (e.target === statusModal) {
+                hideStatusModal();
+            }
+        });
+
+        // New form submission event listener
         form.addEventListener("submit", async function(event) {
             event.preventDefault();
-            
-            statusDiv.textContent = 'Sending your email...'; 
-            statusDiv.className = 'mt-6 text-center text-sm font-medium text-blue-600';
-            statusDiv.classList.remove('success', 'error'); 
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.innerHTML;
+
+            // Provide feedback to the user that something is happening
+            submitButton.disabled = true;
+            submitButton.innerHTML = 'Sending...';
 
             const formData = {
                 name: form.name.value,
@@ -43,7 +83,6 @@ AOS.init({
             };
 
             try {
-                // The fetch URL is now your own API endpoint
                 const response = await fetch('/api/send-email', {
                     method: 'POST',
                     headers: {
@@ -55,16 +94,25 @@ AOS.init({
                 const result = await response.json();
 
                 if (response.ok) {
-                    statusDiv.innerHTML = "Thanks for your message! I'll get back to you soon.";
-                    statusDiv.classList.add('success');
+                    showStatusModal(
+                        'success',
+                        'Success!',
+                        "Thanks for your message! I'll get back to you soon."
+                    );
                     form.reset();
                 } else {
-                    throw new Error(result.message || 'Something went wrong.');
+                    throw new Error(result.message || 'Something went wrong on the server.');
                 }
-
             } catch (error) {
-                statusDiv.innerHTML = `Oops! There was an error: ${error.message}`;
-                statusDiv.classList.add('error');
+                showStatusModal(
+                    'error',
+                    'Oops!',
+                    `There was an error sending your message: ${error.message}`
+                );
+            } finally {
+                // Restore the button to its original state
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalButtonText;
             }
         });
       
@@ -237,3 +285,19 @@ card.addEventListener('mousemove', e => {
 });
  });
 }
+        // --- Typed.js Initialization ---
+ if (document.getElementById('typed-text')) {
+        new Typed('#typed-text', {
+            strings: [
+                'B.Tech. Computer Science Student',
+                'DevOps Engineer',
+                'Java Spring Boot Developer',
+                'Published Researcher in AI/ML'
+            ],
+            typeSpeed: 50,
+            backSpeed: 30,
+            backDelay: 2000,
+            startDelay: 500,
+            loop: true
+        });
+    }
