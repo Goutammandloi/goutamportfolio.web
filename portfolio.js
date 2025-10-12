@@ -301,3 +301,57 @@ card.addEventListener('mousemove', e => {
             loop: true
         });
     }
+        // --- Scroll to Top Button Logic ---
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+        if (scrollTopBtn) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    scrollTopBtn.classList.remove('visible');
+                }
+            });
+
+            scrollTopBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+// End of DOMContentLoaded event listener
+        document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('#main-nav-links a');
+
+    if (sections.length === 0 || navLinks.length === 0) return;
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '-80px 0px 0px 0px',
+        threshold: 0.6 
+    };
+
+    const observerCallback = (entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const sectionId = entry.target.id;
+                navLinks.forEach(link => {
+                    link.classList.remove('nav-active');
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        link.classList.add('nav-active');
+                    }
+                });
+            }
+        });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+});
