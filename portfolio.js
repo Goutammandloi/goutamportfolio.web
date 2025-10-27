@@ -323,36 +323,79 @@ card.addEventListener('mousemove', e => {
             });
         }
 
+// // End of DOMContentLoaded event listener
+//         document.addEventListener('DOMContentLoaded', () => {
+//     const sections = document.querySelectorAll('section[id]');
+//     const navLinks = document.querySelectorAll('#main-nav-links a');
+
+//     if (sections.length === 0 || navLinks.length === 0) return;
+
+//     const observerOptions = {
+//         root: null,
+//         rootMargin: '-80px 0px 0px 0px',
+//         threshold: 0.6 
+//     };
+
+//     const observerCallback = (entries) => {
+//         entries.forEach(entry => {
+//             if (entry.isIntersecting) {
+//                 const sectionId = entry.target.id;
+//                 navLinks.forEach(link => {
+//                     link.classList.remove('nav-active');
+//                     if (link.getAttribute('href') === `#${sectionId}`) {
+//                         link.classList.add('nav-active');
+//                     }
+//                 });
+//             }
+//         });
+//     };
+
+//     const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+//     sections.forEach(section => {
+//         observer.observe(section);
+//     });
+// });
+
+
 // End of DOMContentLoaded event listener
-        document.addEventListener('DOMContentLoaded', () => {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('#main-nav-links a');
+document.addEventListener('DOMContentLoaded', () => {
+ const sections = document.querySelectorAll('section[id]');
+ const navLinks = document.querySelectorAll('#main-nav-links a');
 
-    if (sections.length === 0 || navLinks.length === 0) return;
+ if (sections.length === 0 || navLinks.length === 0) return;
 
-    const observerOptions = {
-        root: null,
-        rootMargin: '-80px 0px 0px 0px',
-        threshold: 0.6 
-    };
+ const observerOptions = {
+  root: null,
+  rootMargin: '-80px 0px 0px 0px', // 80px offset for your sticky nav
+  threshold: 0.3 // FIX 1: Lowered threshold to 30% to catch tall sections
+ };
 
-    const observerCallback = (entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const sectionId = entry.target.id;
-                navLinks.forEach(link => {
-                    link.classList.remove('nav-active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('nav-active');
-                    }
-                });
-            }
-        });
-    };
+ const observerCallback = (entries) => {
+  entries.forEach(entry => {
+            // Find the link that matches the section from this entry
+   const sectionId = entry.target.id;
+   const link = document.querySelector(`#main-nav-links a[href="#${sectionId}"]`);
+   
+   if (!link) return; // Safety check
 
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
+            // FIX 2: Handle both when it enters AND when it leaves
+   if (entry.isIntersecting) {
+                // This section is visible, so it should be the active one.
+                // First, remove active from ALL links.
+    navLinks.forEach(l => l.classList.remove('nav-active'));
+                // Then, add active to this one.
+    link.classList.add('nav-active');
+   } else {
+                // This section is NO LONGER visible, remove its active class.
+    link.classList.remove('nav-active');
+   }
+  });
+ };
 
-    sections.forEach(section => {
-        observer.observe(section);
-    });
+ const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+ sections.forEach(section => {
+  observer.observe(section);
+ });
 });
