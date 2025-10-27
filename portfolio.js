@@ -292,6 +292,7 @@ card.addEventListener('mousemove', e => {
                 'B.Tech. Computer Science Student',
                 'DevOps Engineer',
                 'Java Spring Boot Developer',
+                'Python Django Developer',
                 'Published Researcher in AI/ML'
             ],
             typeSpeed: 50,
