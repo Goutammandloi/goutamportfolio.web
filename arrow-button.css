@@ -1,0 +1,20 @@
+/* Arrow-fill interaction adapted from the supplied Hyperiux Vault component. */
+.arrow-fill{--btn-bg:var(--primary);--btn-fg:#fff;--fill-bg:#fff;--fill-fg:#155dcc;--circle:38px;--inset:6px;--duration:450ms;--button-ease:cubic-bezier(.785,.135,.15,.86);position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:flex-start;min-height:52px;min-width:0;width:fit-content;max-width:100%;padding:12px 62px 12px 22px!important;overflow:hidden;border:1px solid var(--btn-bg);border-radius:999px!important;background:var(--btn-bg);color:var(--btn-fg);font-size:14px!important;font-weight:600;line-height:1.3;white-space:nowrap;gap:0!important;transform:none!important;cursor:pointer}
+.arrow-fill:hover{background:var(--btn-bg);color:var(--btn-fg)}
+.arrow-fill.outline{--btn-bg:var(--card);--btn-fg:var(--text);--fill-bg:var(--primary);--fill-fg:#fff;border-color:var(--border)}
+.arrow-fill .af-label{position:relative;z-index:1}
+.arrow-fill .af-fill{position:absolute;inset:0;z-index:2;background:var(--fill-bg);clip-path:inset(calc((100% - var(--circle))/2) var(--inset) calc((100% - var(--circle))/2) calc(100% - var(--inset) - var(--circle)) round 999px);transition:clip-path var(--duration) var(--button-ease);pointer-events:none}
+.arrow-fill .af-reveal{position:absolute;inset:0;display:flex;align-items:center;padding:12px 62px 12px 22px;color:var(--fill-fg);z-index:3;clip-path:inset(calc((100% - var(--circle))/2) var(--inset) calc((100% - var(--circle))/2) calc(100% - var(--inset) - var(--circle)) round 999px);transition:clip-path var(--duration) var(--button-ease);pointer-events:none}
+.arrow-fill .af-icon{position:absolute;right:var(--inset);top:50%;transform:translateY(-50%);width:var(--circle);height:var(--circle);display:grid;place-items:center;overflow:hidden;border-radius:50%;background:var(--fill-bg);color:var(--fill-fg);z-index:4;pointer-events:none}
+.arrow-fill svg{position:absolute;width:20px;height:20px;transition:transform var(--duration) var(--button-ease)}
+.arrow-fill .af-enter{transform:translateX(-140%) scale(0)}
+.arrow-fill .af-exit{transform:translateX(0) scale(1)}
+.arrow-fill:focus-visible .af-fill,.arrow-fill:focus-visible .af-reveal,.arrow-fill[data-pressed=true] .af-fill,.arrow-fill[data-pressed=true] .af-reveal{clip-path:inset(0 round 999px)}
+.arrow-fill:focus-visible .af-enter,.arrow-fill[data-pressed=true] .af-enter{transform:translateX(0) scale(1)}
+.arrow-fill:focus-visible .af-exit,.arrow-fill[data-pressed=true] .af-exit{transform:translateX(140%) scale(0)}
+@media(hover:hover){.arrow-fill:hover .af-fill,.arrow-fill:hover .af-reveal{clip-path:inset(0 round 999px)}.arrow-fill:hover .af-enter{transform:translateX(0) scale(1)}.arrow-fill:hover .af-exit{transform:translateX(140%) scale(0)}}
+.dark .arrow-fill{--btn-fg:#10213b;--fill-bg:#172438;--fill-fg:#8dbbff}.dark .arrow-fill.outline{--btn-fg:var(--text);--fill-bg:#8dbbff;--fill-fg:#10213b}
+.profile-actions .arrow-fill{width:100%;font-size:12px!important;padding-left:16px!important;padding-right:51px!important;--circle:32px;min-height:46px}
+.profile-actions .af-reveal{padding-left:16px;padding-right:51px}
+@media(max-width:760px){.profile-actions{grid-column:1/-1;display:flex}.profile-actions .arrow-fill{flex:1}.hero-bottom{flex-wrap:wrap}.hero-bottom .arrow-fill{min-height:48px;font-size:12px!important;--circle:34px;padding-left:18px!important;padding-right:56px!important}.hero-bottom .af-reveal{padding-left:18px;padding-right:56px}}
+@media(prefers-reduced-motion:reduce){.arrow-fill,.arrow-fill *{transition:none!important}}

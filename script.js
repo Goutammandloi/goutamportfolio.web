@@ -1,0 +1,8 @@
+const theme=document.querySelector('#theme');
+function setTheme(dark){document.body.classList.toggle('dark',dark);theme.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');try{localStorage.setItem('azure-theme',dark?'dark':'light')}catch{}}
+try{setTheme(localStorage.getItem('azure-theme')==='dark')}catch{}
+theme.addEventListener('click',()=>setTheme(!document.body.classList.contains('dark')));
+let toastTimer;function toast(message){const el=document.querySelector('.toast');el.textContent=message;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),3500)}
+document.querySelectorAll('.copy').forEach(button=>button.addEventListener('click',async()=>{try{await navigator.clipboard.writeText('goutammandloi16work@gmail.com');toast('Email copied to clipboard')}catch{toast('Email: goutammandloi16work@gmail.com')}}));
+document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(b=>{b.classList.toggle('selected',b===button);b.setAttribute('aria-pressed',String(b===button))});document.querySelectorAll('[data-category]').forEach(card=>card.hidden=button.dataset.filter!=='all'&&button.dataset.filter!==card.dataset.category)}));
+const links=[...document.querySelectorAll('.topbar nav a')];const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(a=>{const active=a.hash==='#'+e.target.id;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')})}})},{rootMargin:'-15% 0px -65% 0px'});links.forEach(a=>observer.observe(document.querySelector(a.hash)));
